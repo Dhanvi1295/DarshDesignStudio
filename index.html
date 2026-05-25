@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darsh Designer Studio | Royal Indian Couture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- DESIGN TOKENS & SYSTEM BASE --- */
+        :root {
+            --color-bg-dark: #0f0b08;
+            --color-bg-card: #1a120d;
+            --color-gold: #c89b52;
+            --color-gold-light: #f3d19c;
+            --gold-gradient: linear-gradient(90deg, #c89b52, #f3d19c, #c89b52);
+            --font-serif: 'Cinzel', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --transition-smooth: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-bg-dark);
+            color: var(--color-gold-light);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            overflow-x: hidden;
+            line-height: 1.6;
+            /* Fine texture overlay background grid */
+            background-image: radial-gradient(rgba(26, 18, 13, 0.5) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        h1, h2, h3, h4, .logo-text {
+            font-family: var(--font-serif);
+            tracking: 0.15em;
+        }
+
+        /* --- GLOBAL UTILITIES --- */
+        .text-gold-gradient {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: var(--color-bg-dark);
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            padding: 16px 36px;
+            border: 1px solid var(--color-gold-light);
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: var(--transition-smooth);
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(200, 155, 82, 0.4);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--color-gold);
+            color: var(--color-gold);
+            background: transparent;
+            font-family: var(--font-sans);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            padding: 14px 32px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            background: var(--color-gold);
+            color: var(--color-bg-dark);
+        }
+
+        /* --- SCROLL ANIMATION SYSTEM --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER SECTION --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .announcement-bar {
+            background-color: var(--color-bg-card);
+            color: var(--color-gold-light);
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            border-b: 1px solid rgba(200, 155, 82, 0.2);
+            font-weight: 500;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 60px;
+            background-color: rgba(15, 11, 8, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200, 155, 82, 0.15);
+            transition: var(--transition-smooth);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo-emblem {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid var(--color-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-bg-card);
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--color-gold);
+            transition: transform 0.8s ease;
+        }
+
+        .logo-area:hover .logo-emblem {
+            transform: rotate(360deg);
+        }
+
+        .logo-text {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-link {
+            color: rgba(243, 209, 156, 0.8);
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            position: relative;
+            padding: 4px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-gold-light);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--color-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: var(--color-gold);
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--color-gold-light);
+        }
+
+        /* Hamburger menu for mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--color-gold);
+            transition: var(--transition-smooth);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            absolute: inset 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("assests/a1.jpeg");
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.03);
+            filter: brightness(0.9);
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, var(--color-bg-dark) 25%, rgba(15, 11, 8, 0.7) 60%, transparent 100%),
+                        linear-gradient(0deg, var(--color-bg-dark) 5%, transparent 40%, rgba(15, 11, 8, 0.3) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 80px;
+            margin-top: 60px;
+        }
+
+        .hero-tagline {
+            color: var(--color-gold);
+            font-size: 13px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: 65px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            color: var(--color-gold-light);
+        }
+
+        .hero-title span {
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 15px;
+            letter-spacing: 0.15em;
+            color: rgba(243, 209, 156, 0.75);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--color-gold);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            transition: color 0.3s ease;
+            z-index: 10;
+        }
+
+        .slider-arrow:hover {
+            color: var(--color-gold-light);
+        }
+
+        .arrow-left { left: 24px; }
+        .arrow-right { right: 24px; }
+
+        /* --- ABOUT SECTION --- */
+        .section-padding {
+            padding: 120px 80px;
+        }
+
+        .about {
+            background-color: var(--color-bg-card);
+            border-bottom: 1px solid rgba(200, 155, 82, 0.15);
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: radial-gradient(var(--color-gold) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .about-img-wrapper {
+            border: 1px solid rgba(200, 155, 82, 0.3);
+            padding: 12px;
+            background-color: var(--color-bg-dark);
+        }
+
+        .about-img-container {
+            overflow: hidden;
+            height: 560px;
+            position: relative;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .about-img-wrapper:hover .about-img {
+            transform: scale(1.06);
+        }
+
+        .about-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .section-title {
+            font-size: 34px;
+            letter-spacing: 0.18em;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .title-divider {
+            width: 80px;
+            height: 1px;
+            background-color: var(--color-gold);
+            margin-bottom: 30px;
+        }
+
+        .section-desc {
+            font-size: 14px;
+            letter-spacing: 0.08em;
+            color: rgba(243, 209, 156, 0.75);
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        /* --- CREATIONS / COLLECTION SECTION --- */
+        .creations {
+            background-color: var(--color-bg-dark);
+            border-bottom: 1px solid rgba(200, 155, 82, 0.15);
+        }
+
+        .text-center {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+        }
+
+        .text-center .title-divider {
+            margin: 20px auto 0 auto;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .creation-card {
+            background-color: var(--color-bg-card);
+            border: 1px solid rgba(200, 155, 82, 0.15);
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .card-img-holder {
+            height: 340px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .card-img-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--transition-smooth), filter 0.8s ease;
+        }
+
+        .creation-card:hover {
+            border-color: var(--color-gold);
+            box-shadow: 0 0 25px rgba(200, 155, 82, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .creation-card:hover .card-img-holder img {
+            transform: scale(1.08);
+            filter: brightness(1.1);
+        }
+
+        .card-title {
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-gold-light);
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .creation-card:hover .card-title {
+            color: var(--color-gold);
+        }
+
+        /* --- UPDATE: CINEMATIC SLIDER ARCHITECTURE --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.4s;
+            display: flex;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 2;
+        }
+
+        .slide .hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.08);
+            transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -2;
+        }
+
+        .slide.active .hero-bg {
+            transform: scale(1.01);
+        }
+
+        .slide .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, var(--color-bg-dark) 25%, rgba(15, 11, 8, 0.6) 60%, transparent 100%),
+                        linear-gradient(0deg, var(--color-bg-dark) 5%, transparent 40%, rgba(15, 11, 8, 0.3) 100%);
+            z-index: -1;
+        }
+
+        /* Delays text animations slightly so background changes first */
+        .slide .hero-content {
+            max-width: 800px;
+            padding: 0 80px;
+            margin-top: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+        }
+
+        .slide.active .hero-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        
+        /* --- CUSTOMIZE SECTION --- */
+        .customize {
+            background-color: var(--color-bg-card);
+            border-bottom: 1px solid rgba(200, 155, 82, 0.15);
+        }
+
+        .sketch-img-holder {
+            border: 1px solid rgba(200, 155, 82, 0.2);
+            padding: 10px;
+            background-color: var(--color-bg-dark);
+        }
+
+        .sketch-img-holder img {
+            width: 100%;
+            height: 900px;
+            object-fit: cover;
+            opacity: 0.75;
+            filter: sepia(30%) contrast(110%);
+            transition: var(--transition-smooth);
+        }
+
+        .sketch-img-holder:hover img {
+            opacity: 0.95;
+            filter: sepia(0%) contrast(100%);
+        }
+
+        /* --- FOOTER SECTION --- */
+        footer {
+            background-color: var(--color-bg-dark);
+            border-top: 2px solid var(--color-gold);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1.2fr;
+            gap: 60px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 80px 60px;
+        }
+
+        .footer-brand .logo-area {
+            margin-bottom: 20px;
+        }
+
+        .footer-brand-desc {
+            font-size: 13px;
+            color: rgba(243, 209, 156, 0.6);
+            letter-spacing: 0.05em;
+            max-width: 320px;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .footer-title {
+            font-size: 13px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-gold-light);
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(200, 155, 82, 0.2);
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(243, 209, 156, 0.7);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .footer-contact-text {
+            font-size: 12px;
+            color: rgba(243, 209, 156, 0.7);
+            letter-spacing: 0.08em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-bottom {
+            background-color: rgba(26, 18, 13, 0.5);
+            border-top: 1px solid rgba(200, 155, 82, 0.1);
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            color: rgba(243, 209, 156, 0.4);
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 1100px) {
+            .cards-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 15px 30px;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 90px);
+                background-color: var(--color-bg-dark);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 60px;
+                gap: 40px;
+                transition: var(--transition-smooth);
+                border-top: 1px solid rgba(200, 155, 82, 0.15);
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            /* Hamburger morph */
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+            .two-column-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .section-padding {
+                padding: 80px 40px;
+            }
+            .hero-content {
+                padding: 0 40px;
+            }
+            .hero-title {
+                font-size: 48px;
+            }
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 60px 40px;
+            }
+            .customize .two-column-grid .order-change {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+                max-width: 360px;
+                margin: 0 auto;
+            }
+            .hero-title {
+                font-size: 36px;
+            }
+            .section-title {
+                font-size: 26px;
+            }
+            .section-padding {
+                padding: 60px 20px;
+            }
+            .hero-content {
+                padding: 0 20px;
+            }
+            .social-icons {
+                display: none; /* Keep cleaner layout on narrow phones */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="announcement-bar">
+            WELCOME TO DARSH DESIGNER STUDIO ~ BY HETAL PATEL — WHERE TRADITION MEETS ELEGANCE
+        </div>
+        <nav class="navbar">
+            <div class="logo-area">
+                <div class="logo-emblem">D</div>
+                <span class="logo-text text-gold-gradient">DARSH DESIGNER STUDIO <br> ~ BY HETAL PATEL</span>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#creations" class="nav-link">Our Creations</a></li>
+                <li><a href="#customize" class="nav-link">Customize Section</a></li>
+                <li><a href="#contact" class="nav-link">Contact Us</a></li>
+            </ul>
+
+            <div class="social-icons">
+                <a href="https://www.instagram.com/hetal_11119/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/darshana.patel.549"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/9904794421"><i class="fab fa-whatsapp"></i></a>
+            </div>
+
+            <div class="menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="slider-container">
+            
+            <div class="slide active">
+                <div class="hero-bg" style="background-image: url('assests/a1.jpeg');"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <p class="hero-tagline">Royal Indian Couture</p>
+                    <h1 class="hero-title">DARSH <br><span class="text-gold-gradient">Designer Studio</span></h1>
+                    <p class="hero-subtitle">Crafting Timeless Elegance For Every Celebration</p>
+                    <a href="#creations" class="btn-gold">EXPLORE COLLECTION</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="hero-bg" style="background-image: url('assests/pink.jpeg');"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <p class="hero-tagline">The Heritage Atelier</p>
+                    <h1 class="hero-title">ROYAL <br><span class="text-gold-gradient">CHANIYA CHOLIS</span></h1>
+                    <p class="hero-subtitle">Intricate Handwoven Masterpieces Tailored For You</p>
+                    <a href="#creations" class="btn-gold">VIEW LEHENGAS</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="hero-bg" style="background-image: url('assests/mansi.jpeg');"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <p class="hero-tagline">Bespoke Custom Silhouettes</p>
+                    <h1 class="hero-title">FESTIVE <br><span class="text-gold-gradient">COUTURE</span></h1>
+                    <p class="hero-subtitle">Where Traditional Roots Meet Modern Architecture</p>
+                    <a href="#customize" class="btn-gold">START DESIGNING</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="hero-bg" style="background-image: url('assests/purple.jpeg');"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <p class="hero-tagline">The Bridal Atelier</p>
+                    <h1 class="hero-title">HERITAGE <br><span class="text-gold-gradient">LEHENGAS</span></h1>
+                    <p class="hero-subtitle">Intricate Handwoven Masterpieces For Your Special Day</p>
+                    <a href="#creations" class="btn-gold">VIEW BRIDAL WEAR</a>
+                </div>
+            </div>
+
+        </div>
+        
+        <button class="slider-arrow arrow-left" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-arrow arrow-right" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+    </section>
+
+    <section id="about" class="about section-padding">
+        <div class="two-column-grid reveal">
+            <div class="about-img-wrapper">
+                <div class="about-img-container">
+                    <img src="assests/amain.jpeg" alt="Bridal Pose Back" class="about-img">
+                </div>
+            </div>
+            <div class="about-info">
+                <h2 class="section-title text-gold-gradient">WHERE TRADITION MEETS ELEGANCE</h2>
+                <div class="title-divider"></div>
+                <p class="section-desc">Welcome to Darsh Designer Studio, where historic royal heritage seamlessly blends into architectural modern masterpieces. Every outfit we custom-craft is an artistic statement honoring India’s rich generational craftsmanship.</p>
+                <p class="section-desc">From intricate hand-woven heritage zardozi, custom-picked premium silk layers, to state-of-the-art bespoke structural drapes—we transform your dream high-end bridal visions into magnificent royal realities.</p>
+                <a href="#customize" class="btn-outline" style="margin-top: 15px;">KNOW MORE</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="creations" class="creations section-padding">
+        <div class="text-center reveal">
+            <h2 class="section-title">TIMELESS OUTFITS, MADE WITH LOVE</h2>
+            <div class="title-divider"></div>
+        </div>
+
+        <div class="cards-container reveal">
+            <div class="creation-card">
+                <div class="card-img-holder">
+                    <img src="assests/b2.jpeg" alt="Bridal Wear">
+                </div>
+                <h3 class="card-title">Bridal Wear</h3>
+            </div>
+            <div class="creation-card">
+                <div class="card-img-holder">
+                    <img src="assests/pink.jpeg" alt="Lehengas">
+                </div>
+                <h3 class="card-title">Lehengas</h3>
+            </div>
+            <div class="creation-card">
+                <div class="card-img-holder">
+                    <img src="assests/sa.jpeg" alt="Sarees">
+                </div>
+                <h3 class="card-title">Sarees</h3>
+            </div>
+            <div class="creation-card">
+                <div class="card-img-holder">
+                    <img src="assests/urvi.jpeg" alt="Anarkali Suits">
+                </div>
+                <h3 class="card-title">Anarkali Suits</h3>
+            </div>
+            <div class="creation-card">
+                <div class="card-img-holder">
+                    <img src="assests/mansi.jpeg" alt="Festive Wear">
+                </div>
+                <h3 class="card-title">Festive Wear</h3>
+            </div>
+            <div class="creation-card">
+                <div class="card-img-holder">
+                    <img src="assests/gown.jpeg" alt="Gowns">
+                </div>
+                <h3 class="card-title">Gowns</h3>
+            </div>
+            <div class="creation-card">
+                <div class="card-img-holder">
+                    <img src="assests/green.jpeg" alt="Sarees">
+                </div>
+                <h3 class="card-title">Exclusive saree</h3>
+            </div>
+            <div class="creation-card">
+                <div class="card-img-holder">
+                    <img src="assests/b1.jpeg" alt="Bridal">
+                </div>
+                <h3 class="card-title">Customise Bridal</h3>
+            </div>
+            <div class="creation-card">
+                <div class="card-img-holder">
+                    <img src="assests/aa2.jpeg" alt="Lehengas">
+                </div>
+                <h3 class="card-title">Chaniya Cholis</h3>
+            </div>
+            <div class="creation-card">
+                <div class="card-img-holder">
+                    <img src="assests/anew.jpeg" alt="Gowns">
+                </div>
+                <h3 class="card-title">Navratri Collections</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="customize" class="customize section-padding">
+        <div class="two-column-grid reveal">
+            <div class="sketch-img-holder">
+                <img src="assests/blue.jpeg" alt="Fashion Designing Sketch">
+            </div>
+            <div class="about-info order-change">
+                <h2 class="section-title text-gold-gradient">DESIGN YOUR DREAM OUTFIT</h2>
+                <div class="title-divider"></div>
+                <p class="section-desc">Collaborate intimately with our master curators to map out a unique silhouette silhouette engineered exclusively for you. Pick the precise threads, custom handloom fabrics, and personalized fits down to the finest detail.</p>
+                <button class="btn-gold" style="margin-top: 15px;">START CUSTOMIZING</button>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-area">
+                    <div class="logo-emblem">D</div>
+                    <span class="logo-text text-gold-gradient">DARSH DESIGNER STUDIO ~ By Hetal Patel</span>
+                </div>
+                <p class="footer-brand-desc">Architects of grand royal Indian ethnic ensembles, capturing traditional essence within elegant high-fashion luxury creations.</p>
+                <div class="social-icons" style="display: flex;">
+                    <a href="https://www.instagram.com/hetal_11119/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/darshana.patel.549"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/9904794421"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#creations">Our Creations</a></li>
+                    <li><a href="#customize">Customize Section</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="footer-title">Contact Info</h3>
+                <p class="footer-contact-text">
+                    Anand,Gujarat<br>
+                    Anand - 388001
+                </p>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=DARSH+DESIGN+STUDIO+Anand+Gujarat" target="_blank" class="btn-outline" style="padding: 10px 20px; font-size: 10px; text-align: center;">GET DIRECTIONS</a>
+        </div>
+        
+        <div class="footer-bottom">
+            &copy; 2025 Darsh Designer Studio ~ By Hetal Patel. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Responsive Menu Toggle Script
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth Scroll Reveal System Implementation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+            
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 120; // threshold
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // --- ADDED: LUXURY HERO SLIDER SYSTEM ---
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Click Event Handlers
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetSliderTimer();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetSliderTimer();
+        });
+
+        // Autoplay Loop (Rotates cleanly every 6 seconds)
+        function startSliderTimer() {
+            slideInterval = setInterval(nextSlide, 4000);
+        }
+
+        function resetSliderTimer() {
+            clearInterval(slideInterval);
+            startSliderTimer();
+        }
+
+        // Initialize Slider
+        startSliderTimer();
+
+
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Trigger once immediately on page load initialization
+        window.addEventListener('load', revealOnScroll);
+    </script>
+</body>
+</html>
